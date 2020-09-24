@@ -154,9 +154,23 @@ def conv_inv(a, n, q):
     b[0] = -1
     b[n] = 1
     g, x, y = poly_egcd(b, a, q)
-    if deg(g) > 0 or g[0] != 1:
+    if deg(g) > 0:
         return -1
+    y = conv_mul_mod([inverse_mod(g[0], q)], y, n, q)
     return y
+
+
+def conv_inv_prime_power(f, n, prime, power):
+    G = conv_inv(f, n, prime)
+    if power == 1:
+        return G
+    q = prime ** power
+    cur = 1
+    while cur < power:
+        to_mul = subtract_mod([2], conv_mul_mod(f, G, n, q), q)
+        G = conv_mul_mod(G, to_mul, n, q)
+        cur *= 2
+    return G
 
 
 def example():
@@ -210,8 +224,29 @@ def Q25():
     print(conv_inv(b, n, q))
 
 
+def Q27():
+    n = 5
+    prime = 2
+    power = 4
+    f = np.array([7, 3, 1])
+    _inv = conv_inv_prime_power(f, n, prime, power)
+    print(conv_mul_mod(f, _inv, n, prime ** power))
+    n = 5
+    prime = 2
+    power = 7
+    f = np.array([22, 11, 5, 7])
+    _inv = conv_inv_prime_power(f, n, prime, power)
+    print(conv_mul_mod(f, _inv, n, prime ** power))
+    n = 7
+    prime = 5
+    power = 5
+    f = np.array([112, 34, 239, 234, 105, 180, 137])
+    _inv = conv_inv_prime_power(f, n, prime, power)
+    print(conv_mul_mod(f, _inv, n, prime ** power))
+
+
 if __name__ == "__main__":
     # example()
     # Q23()
     # test_poly()
-    Q25()
+    Q27()
