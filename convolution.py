@@ -125,9 +125,9 @@ def poly_egcd(a, b, q):
 
 def conv_mul(a, b, n):
     if len(a) < n:
-        a = extend(a, n - 1)
+        a = extend(a, n)
     if len(b) < n:
-        b = extend(b, n - 1)
+        b = extend(b, n)
     c = np.zeros(n)
     for i in range(n):
         for j in range(n):
@@ -202,11 +202,13 @@ def Q23():
     b[2] = b[6] = 0
     print(conv_mul_mod(a, b, n, q))
 
+
 def Q25():
     n = 5
     q = 3
     b = np.array([1, 0, 1, -1])
     print(conv_inv(b, n, q))
+
 
 if __name__ == "__main__":
     # example()
