@@ -1,9 +1,9 @@
 def first_divisor(n):
     i = 2
-    while i*i <= n:
+    while i * i <= n:
         if n % i == 0:
             return i
-        i+=1
+        i += 1
     return n
 
 

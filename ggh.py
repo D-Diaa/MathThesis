@@ -59,6 +59,27 @@ def ggh_experiment(d=300, delta=15, dim=10, good_h=0.99, bad_h=0.1):
     print(f"dec_bad m: {bad_m}")
 
 
+def Q18():
+    V = [
+        [4, 13],
+        [-57, -45]
+    ]
+    W = [
+        [25453, 9091],
+        [-16096, -5749]
+    ]
+    print(lin.det(V))
+    print(f"private: {hadamard_ratio(V)}")
+    print(f"public: {hadamard_ratio(W)}")
+
+    e = [155340, 55483]
+    m = decrypt(V, W, e)
+    r = np.array(e) - np.matmul(m, W)
+    print(f"m={m}")
+    print(f"r={r}")
+    print(f"using bad basis={ decrypt(W, W, e)}")
+
+
 if __name__ == '__main__':
     # example()
-    ggh_experiment(dim=10, d=300, delta=5)
+    Q18()
