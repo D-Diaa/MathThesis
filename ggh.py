@@ -1,7 +1,7 @@
 from lattice import *
 
 
-def init_ggh(dim, d, good_h=0.8, bad_h=0.1):
+def init(dim, d, good_h=0.8, bad_h=0.1):
     V = gen_good_basis(dim, -d, d, good_h)
     print(f"good h = {hadamard_ratio(V)}")
     h = 1
@@ -48,7 +48,7 @@ def example():
 
 
 def ggh_experiment(d=300, delta=15, dim=10, good_h=0.99, bad_h=0.1):
-    U, V, W = init_ggh(dim, d, good_h, bad_h)
+    U, V, W = init(dim, d, good_h, bad_h)
     m = np.random.randint(-d, d, (1, dim))[0]
     r = np.random.randint(-delta, delta, (1, dim))[0]
     print(f"original m: {m}")
